@@ -1,0 +1,23 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+/* SIGN IN FORM */
+.form-signin {
+    border: 1px solid #eee;
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}
+.form-signin input[type='email'], input[type='password'], input[type='text'] {
+    height: 45px;
+}
+
+.form-signin h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px !important;
+    font-weight: lighter;
+}
+.form-signin p {  
+    font-weight: lighter;
+}
