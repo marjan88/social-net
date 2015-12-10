@@ -12,7 +12,7 @@
         <div class="navbar-collapse collapse" id="navbar">
             @if(\Auth::user())
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Timeline</a></li>
+                <li @if(\Request::is('/')) class="active" @endif><a href="/">Timeline</a></li>
                 <li><a href="#about">Friends</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search" action="{{route('search.results')}}">
@@ -25,9 +25,12 @@
                 
                 @if(\Auth::user())
                 <li class="dropdown">
-                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{\Auth::user()->getNameOrUsername()}}<span class="caret"></span></a>
+                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <img src="{{\Auth::user()->getAvatarUrl(20)}}" alt="{{\Auth::user()->getNameOrUsername()}}" /> 
+                        {{\Auth::user()->getNameOrUsername()}}<span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li @if(\Request::is('profile*')) class="active" @endif><a href="{{route('user.profile.edit')}}"><i class="fa fa-user"></i> Profile</a></li>
                         <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>                       
                         <li class="divider" role="separator"></li>                        
                         <li><a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Logout</a></li>                       

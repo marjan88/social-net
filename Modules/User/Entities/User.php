@@ -5,12 +5,13 @@ namespace Modules\User\Entities;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Modules\User\Entities\UserInterface;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, UserInterface
 {
 
     use Authenticatable,
@@ -53,6 +54,45 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             return $users;
         }
         return false;
+    }
+
+    public function getAvatarUrl($size)
+    {
+        return 'http://www.gravatar.com/avatar/' . md5($this->email) . '?d=mm&s=' . $size;
+    }
+
+    public static function getUser($username)
+    {
+        $users = User::where('username', $username)->first();
+        if ($users) {
+            return $users;
+        }
+        return false;
+    }
+
+    public static function storeUser()
+    {
+        ;
+    }
+
+    public static function updateUser($request, $id)
+    {
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name'  => $request->last_name,
+            'location'   => $request->location,
+        ];
+        $user = User::find($id);
+        if ($user) {
+            $user->update($data);
+            return true;
+        }
+        return false;
+    }
+
+    public static function deleteUser()
+    {
+        ;
     }
 
 }

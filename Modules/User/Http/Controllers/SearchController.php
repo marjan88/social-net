@@ -9,6 +9,11 @@ use Modules\User\Entities\User;
 class SearchController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getResults(Request $request)
     {
         $query = $request->input('q');
@@ -16,9 +21,9 @@ class SearchController extends Controller
         if (!$query) {
             return redirect()->route('home');
         }
-        
+
         $users = User::searchForUser($query);
-        
+
         return view('user::search.results', compact('users'));
     }
 
