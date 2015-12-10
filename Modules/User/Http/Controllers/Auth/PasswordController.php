@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Http\Controllers\Auth;
+namespace Modules\User\Http\Controllers\Auth;
 
 use Chatty\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;

@@ -25,7 +25,7 @@
                 
                 @if(\Auth::user())
                 <li class="dropdown">
-                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{\Auth::user()->usernameOrName()}}<span class="caret"></span></a>
+                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{\Auth::user()->getNameOrUsername()}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
                         <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>                       

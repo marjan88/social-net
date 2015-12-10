@@ -1,8 +1,8 @@
 <?php
 
-namespace Chatty\Http\Controllers\Auth;
+namespace Modules\User\Http\Controllers\Auth;
 
-use Chatty\User;
+use Modules\Entities\User;
 use Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -49,7 +49,7 @@ use AuthenticatesAndRegistersUsers,
             return view('auth.authenticate');
         }
 
-        return view('auth.login');
+        return view('user::auth.login');
     }
 
     /**
@@ -59,13 +59,13 @@ use AuthenticatesAndRegistersUsers,
      * @return \Illuminate\Http\Response
      */
     public function postLogin(Request $request)
-    {        
-        $this->registrar->validator($request->all());
+    {      
+        $this->registrar->validator($request->all()); 
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        $throttles = $this->isUsingThrottlesLoginsTrait();
+        $throttles = $this->isUsingThrottlesLoginsTrait(); 
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
             return $this->sendLockoutResponse($request);
@@ -74,6 +74,7 @@ use AuthenticatesAndRegistersUsers,
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
+          
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -91,6 +92,15 @@ use AuthenticatesAndRegistersUsers,
         ]);
     }
 
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegister()
+    {
+        return view('user::auth.register');
+    }
     /**
      * Handle a registration request for the application.
      *

@@ -1,10 +1,10 @@
 <?php
 
-namespace Chatty\Http\Controllers;
+namespace Modules\User\Http\Controllers;
 
 use Chatty\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Chatty\User;
+use Modules\User\Entities\User;
 
 class SearchController extends Controller
 {
@@ -19,7 +19,7 @@ class SearchController extends Controller
         
         $users = User::searchForUser($query);
         
-        return view('search.results', compact('users'));
+        return view('user::search.results', compact('users'));
     }
 
 }

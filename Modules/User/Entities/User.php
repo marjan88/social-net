@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty;
+namespace Modules\User\Entities;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -38,7 +38,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function usernameOrName()
+    public function getNameOrUsername()
     {
         return ($this->first_name && $this->last_name) ? $this->first_name . ' ' . $this->last_name : $this->username;
     }

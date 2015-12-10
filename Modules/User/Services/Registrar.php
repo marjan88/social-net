@@ -1,9 +1,9 @@
 <?php
 
-namespace Chatty\Services;
+namespace Modules\User\Services;
 
 use Validator;
-use Chatty\User;
+use Modules\Entities\User;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
 class Registrar implements RegistrarContract
