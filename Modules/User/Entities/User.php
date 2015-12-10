@@ -11,8 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, UserInterface
-{
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, UserInterface {
 
     use Authenticatable,
         Authorizable,
@@ -39,13 +38,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function getNameOrUsername()
-    {
-        return ($this->first_name && $this->last_name) ? $this->first_name . ' ' . $this->last_name : $this->username;
+    public function getNameOrUsername() {
+        return ($this->first_name) ? $this->first_name  : $this->username;
     }
 
-    public static function searchForUser($query)
-    {
+    public static function searchForUser($query) {
         $users = User::where(\DB::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', "%{$query}%")
                 ->orWhere('username', 'LIKE', "%{$query}%")
                 ->get();
@@ -56,13 +53,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public function getAvatarUrl($size)
-    {
+    public function getAvatarUrl($size) {
         return 'http://www.gravatar.com/avatar/' . md5($this->email) . '?d=mm&s=' . $size;
     }
 
-    public static function getUser($username)
-    {
+    public static function getUser($username) {
         $users = User::where('username', $username)->first();
         if ($users) {
             return $users;
@@ -70,17 +65,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public static function storeUser()
-    {
+    public static function storeUser() {
         ;
     }
 
-    public static function updateUser($request, $id)
-    {
+    public static function updateUser($request, $id) {
         $data = [
             'first_name' => $request->first_name,
-            'last_name'  => $request->last_name,
-            'location'   => $request->location,
+            'last_name' => $request->last_name,
+            'location' => $request->location,
         ];
         $user = User::find($id);
         if ($user) {
@@ -90,9 +83,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public static function deleteUser()
-    {
+    public static function deleteUser() {
         ;
     }
+
+    public function getFriendsOfMine() {
+     return $this->belongsToMany('Modules\User\Entities\User', 'friends', 'user_id', 'friend_id');   
+    }
+    
+    public function getFriendOf(){
+        return $this->belongsToMany('Modules\User\Entities\User', 'friends', 'friend_id', 'user_id'); 
+    }
+    
+    public function getFriends() {
+        return $this->getFriendsOfMine()->wherePivot('accepted', true)->get()
+                ->merge($this->getFriendOf()->wherePivot('accepted', true)->get());
+    }
+    public function getFriendRequests() {
+        return $this->getFriendsOfMine()->wherePivot('accepted', false)->get();
+               
+    }
+    
 
 }

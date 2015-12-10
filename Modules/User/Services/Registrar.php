@@ -3,7 +3,7 @@
 namespace Modules\User\Services;
 
 use Validator;
-use Modules\Entities\User;
+use Modules\User\Entities\User;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
 class Registrar implements RegistrarContract

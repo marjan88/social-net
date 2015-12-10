@@ -25,9 +25,9 @@ class EditProfileRequest extends FormRequest
     {
         
         return [
-            'first_name' => 'required|alpha|max:50',
-            'last_name' => 'required|alpha|max:50',
-            'location' => 'required|alpha|max:50',
+            'first_name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'location' => 'required|max:50',
         ];
     }
 }

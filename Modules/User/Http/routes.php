@@ -16,3 +16,6 @@ Route::get('/search', ['uses' => 'SearchController@getResults', 'as' => 'search.
 Route::get('/user/{username}', ['uses' => 'ProfileController@getProfile', 'as' => 'user.profile']);
 Route::get('/profile/edit', ['uses' => 'ProfileController@getEdit', 'as' => 'user.profile.edit']);
 Route::post('/profile/edit', ['uses' => 'ProfileController@postEdit', 'as' => 'user.profile.update']);
+
+//FRIENDS
+Route::get('/friends', ['uses' => 'FriendController@index', 'as' => 'user.friends']);
