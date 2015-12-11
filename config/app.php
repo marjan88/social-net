@@ -153,6 +153,9 @@ return [
         
          Modules\User\Providers\UserServiceProvider::class,
          Modules\User\Providers\RouteServiceProvider::class,
+        
+        Modules\Status\Providers\StatusServiceProvider::class,
+        Modules\Status\Providers\RouteServiceProvider::class,
 
 
     ],

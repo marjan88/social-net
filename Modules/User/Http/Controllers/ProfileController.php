@@ -21,7 +21,7 @@ class ProfileController extends Controller
 
     public function getProfile($username)
     {
-        $user = $this->userRepository->getUser($username);
+        $user = $this->userRepository->getUserByUsername($username);
 
         if (!$user) {
             abort(404);
@@ -40,7 +40,7 @@ class ProfileController extends Controller
             $user = $this->userRepository->updateUser($request, \Auth::user()->id);
             return redirect()->route('user.profile.edit')->with('success', 'You have successfully updated your profile.');
         } catch (Exception $e) {
-            
+            return redirect()->route('user.profile.edit')->with('error', $e->getMessage());
         }
     }
 

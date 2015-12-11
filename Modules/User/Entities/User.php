@@ -11,7 +11,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, UserInterface {
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, UserInterface
+{
 
     use Authenticatable,
         Authorizable,
@@ -38,11 +39,23 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function getNameOrUsername() {
-        return ($this->first_name) ? $this->first_name  : $this->username;
+    
+    public function statuses() {
+        return $this->hasMany('Modules\Status\Entities\Status', 'user_id');
+    }
+    
+    public function getNameOrUsername()
+    {
+        return ($this->first_name) ? $this->first_name : $this->username;
     }
 
-    public static function searchForUser($query) {
+    public function getFullName()
+    {
+        return ($this->first_name && $this->last_name) ? $this->first_name . ' ' . $this->last_name : $this->username;
+    }
+
+    public static function searchForUser($query)
+    {
         $users = User::where(\DB::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', "%{$query}%")
                 ->orWhere('username', 'LIKE', "%{$query}%")
                 ->get();
@@ -53,11 +66,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public function getAvatarUrl($size) {
+    public function getAvatarUrl($size)
+    {
         return 'http://www.gravatar.com/avatar/' . md5($this->email) . '?d=mm&s=' . $size;
     }
 
-    public static function getUser($username) {
+    public static function getUserByUsername($username)
+    {
         $users = User::where('username', $username)->first();
         if ($users) {
             return $users;
@@ -65,15 +80,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public static function storeUser() {
+    public static function storeUser()
+    {
         ;
     }
 
-    public static function updateUser($request, $id) {
+    public static function updateUser($request, $id)
+    {
         $data = [
             'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'location' => $request->location,
+            'last_name'  => $request->last_name,
+            'location'   => $request->location,
         ];
         $user = User::find($id);
         if ($user) {
@@ -83,26 +100,60 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public static function deleteUser() {
+    public static function deleteUser()
+    {
         ;
     }
 
-    public function getFriendsOfMine() {
-     return $this->belongsToMany('Modules\User\Entities\User', 'friends', 'user_id', 'friend_id');   
+    public function getFriendsOfMine()
+    {
+        return $this->belongsToMany('Modules\User\Entities\User', 'friends', 'user_id', 'friend_id');
     }
-    
-    public function getFriendOf(){
-        return $this->belongsToMany('Modules\User\Entities\User', 'friends', 'friend_id', 'user_id'); 
+
+    public function getFriendOf()
+    {
+        return $this->belongsToMany('Modules\User\Entities\User', 'friends', 'friend_id', 'user_id');
     }
-    
-    public function getFriends() {
+
+    public function getFriends()
+    {
         return $this->getFriendsOfMine()->wherePivot('accepted', true)->get()
-                ->merge($this->getFriendOf()->wherePivot('accepted', true)->get());
+                        ->merge($this->getFriendOf()->wherePivot('accepted', true)->get());
     }
-    public function getFriendRequests() {
+
+    public function getFriendRequests()
+    {
         return $this->getFriendsOfMine()->wherePivot('accepted', false)->get();
-               
     }
-    
+
+    public function getFriendRequestPending()
+    {
+        return $this->getFriendOf()->wherePivot('accepted', false)->get();
+    }
+
+    public function hasFriendRequestPending(User $user)
+    {
+        return (bool) $this->getFriendRequestPending()->where('id', $user->id)->count();
+    }
+
+    public function hasFriendRequestReceived(User $user)
+    {
+        return (bool) $this->getFriendRequests()->where('id', $user->id)->count();
+    }
+
+    public function addFriend(User $user)
+    {
+        $this->getFriendOf()->attach($user->id);
+    }
+
+    public function acceptFriendRequest(User $user)
+    {
+        $this->getFriendRequests()->where('id', $user->id)->first()->pivot->update(['accepted' => true]);
+    }
+
+    public function isFriendsWith(User $user)
+    {
+        return (bool) $this->getFriends()->where('id', $user->id)->count();
+    }
 
 }

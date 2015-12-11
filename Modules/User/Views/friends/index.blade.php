@@ -13,7 +13,7 @@
             <img class="media-object" alt="{{$user->getNameOrUsername()}}" src="{{$user->getAvatarUrl(40)}}">
         </a>
         <div class="media-body">
-            <h4 class="media-heading"> <a href="{{route('user.profile', ['username' => $user->username])}}"> {{$user->getNameOrUsername()}} </a></h4>
+            <h4 class="media-heading"> <a href="{{route('user.profile', ['username' => $user->username])}}"> {{$user->getFullName()}} </a></h4>
             @if($user->location)
             <p>{{$user->location}}</p>
             @endif
@@ -32,11 +32,13 @@
             <img class="media-object" alt="{{$user->getNameOrUsername()}}" src="{{$user->getAvatarUrl(40)}}">
         </a>
         <div class="media-body">
-            <h4 class="media-heading"> <a href="{{route('user.profile', ['username' => $user->username])}}"> {{$user->getNameOrUsername()}} </a></h4>
+            <h4 class="media-heading"> <a href="{{route('user.profile', ['username' => $user->username])}}"> {{$user->getFullName()}} </a>
+            <a href="{{route('user.friends.accept', ['username' => $user->username])}}" class="btn btn-success pull-right"><i class="fa fa-user-plus"></i> Accept friend</a>
+            </h4>
             @if($user->location)
             <p>{{$user->location}}</p>
             @endif
-            <a class="btn btn-info" href="">Accept</a>
+            
         </div>
         <hr/>
         @endforeach

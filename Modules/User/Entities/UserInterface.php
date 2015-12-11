@@ -5,7 +5,7 @@ namespace Modules\User\Entities;
 interface UserInterface
 {
 
-    public static function getUser($username);
+    public static function getUserByUsername($username);
 
     public static function storeUser();
 
