@@ -7,12 +7,12 @@ use Modules\User\Entities\User;
 class UserRepository
 {
 
-    public function getUser($username)
+    public function getUserByUsername($username)
     {
-        $user = User::getUser($username);
+        $user = User::getUserByUsername($username);
         
         if (!$user)
-             throw new \Exception('Something went wrong.');
+            return false;
         return $user;
     }
 
@@ -20,7 +20,7 @@ class UserRepository
     {
         $user = User::updateUser($request, $id);
         if (!$user)
-            throw new \Exception('Updating failed');
+            throw new \Exception('User could not be updated.');
         return $user;
     }
 

@@ -19,3 +19,5 @@ Route::post('/profile/edit', ['uses' => 'ProfileController@postEdit', 'as' => 'u
 
 //FRIENDS
 Route::get('/friends', ['uses' => 'FriendController@index', 'as' => 'user.friends']);
+Route::get('/friends/add/{username}', ['uses' => 'FriendController@getAdd', 'as' => 'user.friends.add']);
+Route::get('/friends/accept/{username}', ['uses' => 'FriendController@getAccept', 'as' => 'user.friends.accept']);

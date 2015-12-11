@@ -21,6 +21,7 @@ body{
 .form-signin p {  
     font-weight: lighter;
 }
+
 .badge-friend {
     background-color: red;
     border-radius: 10px;
@@ -37,4 +38,25 @@ body{
     top: 11px;
     vertical-align: middle;
     white-space: nowrap;
+
+
+.status-option-dropdown {
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);   
+    float: left;
+    font-size: 14px;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    left:auto !important;
+    min-width: 100px;
+    padding: 5px 0;
+    position: absolute;
+    right: 0 !important;
+    text-align: right;
+    top: 100%;
+    z-index: 1000;
+
 }
