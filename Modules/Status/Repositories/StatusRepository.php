@@ -7,14 +7,24 @@ use Modules\Status\Entities\Status;
 class StatusRepository
 {
 
-    public function getStatuses()
+    public function getAllStatuses()
     {
         return $user = Status::getItems();
+    }
+    
+    public function getAllStatusesAndReplies()
+    {
+        return $user = Status::getAllStatuses();
     }
     
     public function findStatus($id)
     {
         return $user = Status::getItem($id);
+    }
+    
+    public function findStatusAndReply($id)
+    {
+        return $user = Status::getItemAndReply($id);
     }
     
      public function saveReply($data)

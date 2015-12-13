@@ -147,15 +147,14 @@ return [
         
         /*
          * Module Providers 
-         */
-         Modules\Page\Providers\PageServiceProvider::class,
-         Modules\Page\Providers\RouteServiceProvider::class,
+         */         
         
          Modules\User\Providers\UserServiceProvider::class,
          Modules\User\Providers\RouteServiceProvider::class,
         
         Modules\Status\Providers\StatusServiceProvider::class,
-        Modules\Status\Providers\RouteServiceProvider::class,
+        Modules\Status\Providers\RouteServiceProvider::class,        
+        
 
 
     ],

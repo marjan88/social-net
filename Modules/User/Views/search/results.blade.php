@@ -15,7 +15,7 @@
                 <p>{{$user->location}}</p>
                 @endif
                 @if(\Auth::user()->hasFriendRequestPending($user))
-                <button disabled="" class="btn btn-default ">Cancel Friend Request</button>
+                @include('templates.partials.delete-friend', ['btnName' => 'Cancel Friend Request', 'class' => ''])               
                 @elseif(\Auth::user()->hasFriendRequestReceived($user))
                 <a href="{{route('user.friends.accept', ['username' => $user->username])}}" class="btn btn-success "><i class="fa fa-user-plus"></i> Accept friend</a>
                 @elseif(\Auth::user()->isFriendsWith($user))
@@ -23,6 +23,7 @@
                 @else
                 <a href="{{route('user.friends.add', ['username' => $user->username])}}" class="btn btn-success "><i class="fa fa-user-plus"></i> Add friend</a>
                 @endif
+                
             </div>
             <hr/>
             @endforeach

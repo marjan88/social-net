@@ -18,9 +18,18 @@
         </div>
         @section('scripts')
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="{{asset('assets/site/js/bootstrap.min.js')}}"></script>
-        @show
-    </body>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>-->
+    </head>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{asset('assets/site/js/bootstrap.min.js')}}"></script>
+    <!--<script type="text/babel" src="{{asset('assets/site/js/react.js')}}"></script>-->
+     <!--<script type="text/babel" src="{{asset('assets/site/js/requests.js')}}"></script>-->
+
+    @show
+</body>
 </html>

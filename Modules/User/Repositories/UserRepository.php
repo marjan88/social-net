@@ -23,5 +23,13 @@ class UserRepository
             throw new \Exception('User could not be updated.');
         return $user;
     }
+    
+     public function deleteUser($user)
+    { 
+        $removeUser = \Auth::user()->deleteFriend($user);
+        if (!$removeUser)
+            return false;
+        return $removeUser;
+    }
 
 }

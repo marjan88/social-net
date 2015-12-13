@@ -39,7 +39,7 @@ body{
     vertical-align: middle;
     white-space: nowrap;
 
-
+}
 .status-option-dropdown {
     background-clip: padding-box;
     background-color: #fff;
@@ -59,4 +59,14 @@ body{
     top: 100%;
     z-index: 1000;
 
+}
+
+.reply-inline {
+    display: inline;
+}
+.grey {
+    color: #c0c0c0;
+}
+.grey:hover{
+     color: #337ab7;
 }

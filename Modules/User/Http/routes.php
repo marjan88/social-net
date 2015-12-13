@@ -21,3 +21,11 @@ Route::post('/profile/edit', ['uses' => 'ProfileController@postEdit', 'as' => 'u
 Route::get('/friends', ['uses' => 'FriendController@index', 'as' => 'user.friends']);
 Route::get('/friends/add/{username}', ['uses' => 'FriendController@getAdd', 'as' => 'user.friends.add']);
 Route::get('/friends/accept/{username}', ['uses' => 'FriendController@getAccept', 'as' => 'user.friends.accept']);
+Route::post('/friends/delete', ['uses' => 'FriendController@deleteRequest', 'as' => 'user.friends.delete']);
+
+// API
+Route::group(['prefix' => 'api'], function () {
+   Route::get('friend-requests', ['uses' => 'FriendController@getRequests']);
+   
+});
+

@@ -13,7 +13,8 @@
             @if(\Auth::user())
             <ul class="nav navbar-nav">
                 <li @if(\Request::is('/')) class="active" @endif><a href="/">Timeline</a></li>
-                <li  @if(\Request::is('/friends')) class="active" @endif><a href="{{route('user.friends')}}">Friends</a></li>
+                <li  @if(\Request::is('/friends')) class="active" @endif><a href="{{route('user.friends')}}">
+                        @if(\Auth::user()->getFriendRequests()->count() > 0)<span class="badge badge-friend">{{\Auth::user()->getFriendRequests()->count()}}</span> @endif Friends</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search" action="{{route('search.results')}}">
                 <div class="form-group">
