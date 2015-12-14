@@ -18,6 +18,22 @@
             </div>
             <hr/>
 
+            <!-- IF User Profile add Status -->
+            @if($user->id === \Auth::id())
+
+            <form role="form" action="{{route('add.status')}}" method="POST">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="form-group {{{ $errors->has('status') ? 'has-error' : '' }}}">
+                    <textarea placeholder="Whats up {{\Auth::user()->getNameOrUsername()}}?" name="status" class="form-control" rows="2"></textarea>
+                    {!! $errors->first('status', '<span class="help-block error" role="alert"><small>:message</small></span>')!!}
+                </div>
+                <button type="submit" class="btn btn-default">Update status</button>
+            </form>
+            <hr>       
+
+
+            @endif
+
             <!-- USER TIMELINE -->
             @if(!$statuses)
             <p>{{$user->getFullName()}} has not posted anything, yet.</p>
@@ -32,16 +48,21 @@
                     <h4 class="media-heading">
                         <a href="{{route('user.profile', ['username' => $status->user->username])}}">{{$status->user->getFullName()}}</a>
                         @if($status->user->id == \Auth::user()->id)
-                        <ul class="pull-right list-unstyled  ">
-                            <li class="dropdown">
-                                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu status-option-dropdown">
-                                    <li><a href="">Delete</a></li>                       
-                                </ul>
-                            </li>
-                        </ul>
+                        <form method="post" action="{{route('delete.status')}}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="statusId" value="{{$status->id}}">
+                            <ul class="pull-right list-unstyled  ">
+                                <li class="dropdown">
+                                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu status-option-dropdown">
+
+                                        <li><button type="submit" class="btn btn-default btn-sm">Delete</button></li>                       
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
                         @endif
                     </h4>
 
@@ -68,16 +89,20 @@
                         <h5 class="reply-inline">
                             <a href="{{route('user.profile', ['username' => $reply->user->username])}}">{{$reply->user->getFullName()}}</a>
                             @if($reply->user->id == \Auth::user()->id)
+                            <form method="post" action="{{route('delete.status')}}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="statusId" value="{{$reply->id}}">
                             <ul class="pull-right list-unstyled  ">
                                 <li class="dropdown">
                                     <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu status-option-dropdown">
-                                        <li><a href="">Delete</a></li>                       
+                                        <li><button type="submit" class="btn btn-default btn-sm">Delete</button></li>                       
                                     </ul>
                                 </li>
                             </ul>
+                            </form>
                             @endif
                         </h5>
                         <p class="reply-inline">{{$reply->body}}</p>
@@ -121,7 +146,7 @@
         @include('templates.partials.delete-friend', ['btnName' => 'Remove'])
         @endif
         <h4><?php echo (\Auth::user()->id == $user->id) ? 'Your' : $user->getNameOrUsername() . 's'; ?> friends.
-            
+
             @if(\Auth::user()->hasFriendRequestPending($user))
             @include('templates.partials.delete-friend', ['btnName' => 'Cancel Friend Request'])           
             @elseif(\Auth::user()->hasFriendRequestReceived($user))

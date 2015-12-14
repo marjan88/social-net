@@ -107,6 +107,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function likes() {
         return $this->hasMany('Modules\Status\Entities\Like', 'user_id');
     }
+    
+     public function images() {
+        return $this->hasMany('Modules\Image\Entities\Image', 'user_id');
+    }
 
     public function getFriends() {
         return $this->getFriendsOfMine()->wherePivot('accepted', true)->get()

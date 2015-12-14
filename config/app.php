@@ -149,11 +149,14 @@ return [
          * Module Providers 
          */         
         
-         Modules\User\Providers\UserServiceProvider::class,
-         Modules\User\Providers\RouteServiceProvider::class,
+        Modules\User\Providers\UserServiceProvider::class,
+        Modules\User\Providers\RouteServiceProvider::class,
         
         Modules\Status\Providers\StatusServiceProvider::class,
-        Modules\Status\Providers\RouteServiceProvider::class,        
+        Modules\Status\Providers\RouteServiceProvider::class,  
+        
+        Modules\Image\Providers\ImageServiceProvider::class,
+        Modules\Image\Providers\RouteServiceProvider::class,      
         
 
 

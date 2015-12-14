@@ -20,7 +20,7 @@
         <p>There is nothing on your timeline, yet.</p>
         @else
         @foreach($statuses as $status)
-        
+
         <div class="media">
             <a class="pull-left" href="{{route('user.profile', ['username' => $status->user->username])}}">
                 <img class="media-object" src="{{$status->user->getAvatarUrl(40)}}" alt="{{$status->user->getNameOrUsername()}}"/>
@@ -29,16 +29,20 @@
                 <h4 class="media-heading">
                     <a href="{{route('user.profile', ['username' => $status->user->username])}}">{{$status->user->getFullName()}}</a>
                     @if($status->user->id == \Auth::user()->id)
-                    <ul class="pull-right list-unstyled  ">
-                        <li class="dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu status-option-dropdown">
-                                <li><a href="">Delete</a></li>                       
-                            </ul>
-                        </li>
-                    </ul>
+                    <form method="post" action="{{route('delete.status')}}">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <input type="hidden" name="statusId" value="{{$status->id}}">
+                        <ul class="pull-right list-unstyled  ">
+                            <li class="dropdown">
+                                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu status-option-dropdown">
+                                    <li><button type="submit" class="btn btn-default btn-sm">Delete</button></li>                       
+                                </ul>
+                            </li>
+                        </ul>
+                    </form>
                     @endif
                 </h4>
 
@@ -65,16 +69,20 @@
                     <h5 class="reply-inline">
                         <a href="{{route('user.profile', ['username' => $reply->user->username])}}">{{$reply->user->getFullName()}}</a>
                         @if($reply->user->id == \Auth::user()->id)
-                        <ul class="pull-right list-unstyled  ">
-                            <li class="dropdown">
-                                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu status-option-dropdown">
-                                    <li><a href="">Delete</a></li>                       
-                                </ul>
-                            </li>
-                        </ul>
+                        <form method="post" action="{{route('delete.status')}}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="statusId" value="{{$reply->id}}">
+                            <ul class="pull-right list-unstyled  ">
+                                <li class="dropdown">
+                                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu status-option-dropdown">
+                                        <li><button type="submit" class="btn btn-default btn-sm">Delete</button></li>                       
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
                         @endif
                     </h5>
                     <p class="reply-inline">{{$reply->body}}</p>

@@ -7,16 +7,19 @@ use Modules\Status\Http\Requests\StoreStatusRequest;
 use Modules\Status\Repositories\StatusRepository;
 use Illuminate\Http\Request;
 
-class StatusController extends Controller {
+class StatusController extends Controller
+{
 
     protected $statusRepository;
 
-    public function __construct(StatusRepository $statusRepository) {
+    public function __construct(StatusRepository $statusRepository)
+    {
         $this->statusRepository = $statusRepository;
         $this->middleware('auth');
     }
 
-    public function postStatus(StoreStatusRequest $request) {
+    public function postStatus(StoreStatusRequest $request)
+    {
         \Auth::user()->statuses()->create([
             'body' => $request->status,
         ]);
@@ -24,7 +27,8 @@ class StatusController extends Controller {
         return redirect()->back()->with('success', 'Status posted.');
     }
 
-    public function postReply(Request $request, $statusId) {
+    public function postReply(Request $request, $statusId)
+    {
         $this->validate($request, [
             'reply-' . $statusId => 'required|max:1000',
                 ], [
@@ -45,7 +49,8 @@ class StatusController extends Controller {
         return redirect()->back();
     }
 
-    public function getLike($statusId) {
+    public function getLike($statusId)
+    {
         $status = $this->statusRepository->findStatusAndReply($statusId);
         if (!$status)
             return redirect('/');
@@ -61,7 +66,8 @@ class StatusController extends Controller {
         return redirect()->back();
     }
 
-    public function deleteLike($statusId) {
+    public function deleteLike($statusId)
+    {
         $status = $this->statusRepository->findStatusAndReply($statusId);
         if (!$status)
             return redirect('/');
@@ -75,8 +81,23 @@ class StatusController extends Controller {
         return redirect()->back();
     }
 
-    public function getAllStatuses() {
+    public function getAllStatuses()
+    {
         return $this->statusRepository->getAllStatuses();
+    }
+
+    public function deleteStatus()
+    {
+        if (\Request::isMethod('post')) {
+
+            $deleteStatus = $this->statusRepository->deleteStatus(\Input::get('statusId'));
+
+            if (!$deleteStatus)
+                return back()->with('error', 'Status could not be deleted, try again.');
+ 
+            return back()->with('success', 'Status successfully deleted.');
+        }
+        return redirect()->back();
     }
 
 }

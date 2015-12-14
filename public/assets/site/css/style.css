@@ -68,5 +68,52 @@ body{
     color: #c0c0c0;
 }
 .grey:hover{
-     color: #337ab7;
+    color: #337ab7;
+}
+
+/* PROFILE IMAGE */
+.image-box {
+    width:200px;
+    position:relative;
+    overflow: hidden; 
+}
+.image-box img {
+    max-width: 100%; 
+    height: auto;
+    display: block; /* added this */
+}
+.image-box a {
+    position:absolute;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    z-index:2;
+    cursor: pointer;
+}
+.image-box .image-overlay{
+    opacity:0;
+    position:absolute;
+    color: #fff;
+    background: rgba(141, 178, 215, 0.77);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    text-align:center;
+    font-size:40px;
+    line-height: 200px;  /* added this */
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -ms-transition: opacity .5s ease-in-out;
+    -o-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+    z-index:1;
+}
+
+.image-box:hover .image-overlay{
+    opacity:1;
 }

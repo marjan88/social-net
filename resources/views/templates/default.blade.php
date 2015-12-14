@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="{{asset('assets/site/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/site/css/fileinput.min.css')}}" rel="stylesheet">
         <link href="{{asset('assets/site/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300' rel='stylesheet' type='text/css'>
         <link href="{{asset('assets/site/css/style.css')}}" rel="stylesheet">
@@ -27,6 +28,7 @@
     </head>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{asset('assets/site/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/site/js/fileinput.min.js')}}"></script>
     <!--<script type="text/babel" src="{{asset('assets/site/js/react.js')}}"></script>-->
      <!--<script type="text/babel" src="{{asset('assets/site/js/requests.js')}}"></script>-->
 

@@ -2,6 +2,7 @@
 
 Route::post('status', ['uses' => 'StatusController@postStatus', 'as' => 'add.status']);
 Route::post('status/{statusId}/reply', ['uses' => 'StatusController@postReply', 'as' => 'reply.status']);
+Route::post('status/delete', ['uses' => 'StatusController@deleteStatus', 'as' => 'delete.status']);
 
 // LIKES
 Route::get('status/{statusId}/like', ['uses' => 'StatusController@getLike', 'as' => 'like.status']);
