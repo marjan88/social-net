@@ -23,7 +23,7 @@
 
         <div class="media">
             <a class="pull-left" href="{{route('user.profile', ['username' => $status->user->username])}}">
-                <img class="media-object" src="{{$status->user->getAvatarUrl(40)}}" alt="{{$status->user->getNameOrUsername()}}"/>
+                <img width="40" class="media-object" src="{{$status->user->getProfilePicture(40)}}" alt="{{$status->user->getNameOrUsername()}}"/>
             </a>
             <div class="media-body">
                 <h4 class="media-heading">
@@ -63,7 +63,7 @@
                 @foreach($status->replies as $reply)
                 <div class="media">
                     <a class="pull-left" href="{{route('user.profile', ['username' => $reply->user->username])}}">
-                        <img class="media-object" src="{{$reply->user->getAvatarUrl(20)}}" alt="{{$reply->user->getNameOrUsername()}}">
+                        <img width="20" class="media-object" src="{{$reply->user->getProfilePicture(20)}}" alt="{{$reply->user->getNameOrUsername()}}">
                     </a>
 
                     <h5 class="reply-inline">

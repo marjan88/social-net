@@ -1,3 +1,3 @@
 <?php
 
-Route::get('page', ['uses' => 'PageController@index', 'as' => 'page']);
+Route::post('store-image', ['uses' => 'ImageController@storeImage', 'as' => 'store.image']);

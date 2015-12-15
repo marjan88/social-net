@@ -15,7 +15,8 @@
                     <div class="image-overlay">
                         <i class="fa fa-edit"></i>
                     </div>
-                    <img src="{{\Auth::user()->getAvatarUrl(200)}}" alt="{{\Auth::user()->username}}"/>
+                    <img src="{{\Auth::user()->getProfilePicture()}}" alt="{{\Auth::user()->username}}"/>
+                    {!! $errors->first('profile_image', '<span class="help-block error" role="alert"><small>:message</small></span>')!!}
                 </div>
             </div>
             <hr>
@@ -59,7 +60,7 @@
 <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="post" action="" enctype="multipart/form-data">
+            <form method="post" action="{{route('store.image')}}" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="profileModalLabel">Edit profile image</h4>
@@ -67,12 +68,12 @@
                 <div class="modal-body">
 
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-                    <input id="profile-img" name="image" type="file" class="file" multiple="false">
+                    <input id="profile-img" name="profile_image" type="file" class="file" multiple="false">                    
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="upload-img" type="button" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+                    <button id="upload-img" type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
                 </div>
             </form>
         </div>
@@ -89,6 +90,6 @@
         showUpload: false
 
     });
-   
+
 </script>
 @stop

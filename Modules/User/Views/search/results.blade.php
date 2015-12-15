@@ -7,7 +7,7 @@
             @if($users)
             @foreach($users as $user)
             <a class="pull-left" href="{{route('user.profile', ['username' => $user->username])}}">
-                <img class="media-object" alt="{{$user->getNameOrUsername()}}" src="{{$user->getAvatarUrl(40)}}">
+                <img width="40" class="media-object" alt="{{$user->getNameOrUsername()}}" src="{{$user->getProfilePicture()}}">
             </a>
             <div class="media-body">
                 <h4 class="media-heading"><a href="{{route('user.profile', ['username' => $user->username])}}">{{$user->getFullName()}}</a></h4>

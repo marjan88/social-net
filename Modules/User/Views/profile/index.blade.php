@@ -7,7 +7,7 @@
         <div class="media">            
 
             <a class="pull-left" href="{{route('user.profile', ['username' => $user->username])}}">
-                <img class="media-object" alt="{{$user->getNameOrUsername()}}" src="{{$user->getAvatarUrl(40)}}">
+                <img width="40" class="media-object" alt="{{$user->getNameOrUsername()}}" src="{{$user->getProfilePicture()}}">
             </a>             
             <div class="media-body">
                 <h4 class="media-heading"><a href="{{route('user.profile', ['username' => $user->username])}}">{{$user->getFullName()}}</a></h4>
@@ -18,7 +18,7 @@
             </div>
             <hr/>
 
-            <!-- IF User Profile add Status -->
+            <!-- If User Profile, Post Status -->
             @if($user->id === \Auth::id())
 
             <form role="form" action="{{route('add.status')}}" method="POST">
@@ -42,7 +42,7 @@
 
             <div class="media">
                 <a class="pull-left" href="{{route('user.profile', ['username' => $status->user->username])}}">
-                    <img class="media-object" src="{{$status->user->getAvatarUrl(40)}}" alt="{{$status->user->getNameOrUsername()}}">
+                    <img width="40" class="media-object" src="{{$status->user->getProfilePicture()}}" alt="{{$status->user->getNameOrUsername()}}">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">
@@ -83,7 +83,7 @@
                     @foreach($status->replies as $reply)
                     <div class="media">
                         <a class="pull-left" href="{{route('user.profile', ['username' => $reply->user->username])}}">
-                            <img class="media-object" src="{{$reply->user->getAvatarUrl(20)}}" alt="{{$reply->user->getNameOrUsername()}}">
+                            <img width="20" class="media-object" src="{{$reply->user->getProfilePicture()}}" alt="{{$reply->user->getNameOrUsername()}}">
                         </a>
 
                         <h5 class="reply-inline">
