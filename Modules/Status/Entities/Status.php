@@ -19,7 +19,7 @@ class Status extends Model implements StatusInterface
 
     public function getAvatarAttribute()
     {
-        return $this->user()->where('id', $this->user_id)->first()->getAvatarUrl(40);
+        return $this->user()->where('id', $this->user_id)->first()->getProfilePicture();
     }
 
     public function getUserNameAttribute()

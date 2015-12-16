@@ -14,6 +14,7 @@ class AlterImagesTable extends Migration
     {
         Schema::table('images', function (Blueprint $table) {
             $table->boolean('is_profile')->default(0);
+            $table->integer('album_id');
         });
     }
 
@@ -26,6 +27,7 @@ class AlterImagesTable extends Migration
     {
         Schema::table('images', function (Blueprint $table) {
             $table->dropColumn('is_profile');
+            $table->dropColumn('album_id');
         });
     }
 }

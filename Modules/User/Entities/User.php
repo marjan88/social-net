@@ -45,6 +45,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('Modules\Status\Entities\Status', 'user_id');
     }
+    
+    public function albums(){
+        return $this->hasMany('Modules\ImageAlbum\Entities\ImageAlbum', 'user_id');
+    }
 
     public function getNameOrUsername()
     {
@@ -70,7 +74,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function getProfilePicture()
     {
-        $image = Image::where('user_id', $this->id)->where('is_profile', true)->first();
+        $image = $this->images()->where('is_profile', true)->first();
         if($image)
             return asset('/appfiles/images/' . $this->id . '/' . $image->name . '.' . $image->type);
         return $this->getAvatarUrl();

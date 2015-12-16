@@ -8,21 +8,26 @@ class Image extends Model
 {
 
     protected $table    = 'images';
-    protected $fillable = ['name', 'user_id', 'type', 'size', 'is_profile'];
+    protected $fillable = ['name', 'user_id', 'type', 'size', 'is_profile', 'album_id'];
 
     public function user()
     {
         return $this->belongsTo('Modules\User\Entities\User', 'user_id');
     }
 
+    public function album()
+    {
+        return $this->belongsTo('Modules\ImageAlbum\Entities\ImageAlbum', 'album_id');
+    }
+
     public static function storeItem($request)
     {
-        $img = Image::create($request);
+        $img = Image::create($request)->user()->associate(\Auth::user());
         if ($img)
             return $img;
         return false;
     }
-    
+
     public static function getItem()
     {
         $img = Image::where('user_id', \Auth::id())->where('is_profile', true)->first();
@@ -30,7 +35,8 @@ class Image extends Model
             return $img;
         return false;
     }
-
+    
+    
     public static function deleteItem($id)
     {
         
