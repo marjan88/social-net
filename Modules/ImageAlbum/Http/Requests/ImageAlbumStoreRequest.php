@@ -27,6 +27,7 @@ class ImageAlbumStoreRequest extends FormRequest
 
         return [
             'name' => 'required|max:255',
+            'images' => 'required',
         ];
     }
 

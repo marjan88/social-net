@@ -26,7 +26,7 @@ class ImageRepository
         $album = ImageAlbum::firstOrCreate(['name' => 'Profile Pictures', 'slug' => 'profile-pictures']);
         $album->user()->associate(\Auth::user())->save();
         $image->album()->associate($album)->save();
-        $filePath = public_path() . '/appfiles/images/' . \Auth::id() . '/';
+        $filePath = public_path() . '/appfiles/images/' . \Auth::id() . '/' . $album->slug . '/';
         $fileName = $data['name'] . '.' . $data['type'];
 
         if (file_exists($filePath . $fileName))

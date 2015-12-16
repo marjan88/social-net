@@ -76,7 +76,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         $image = $this->images()->where('is_profile', true)->first();
         if($image)
-            return asset('/appfiles/images/' . $this->id . '/' . $image->name . '.' . $image->type);
+            return asset('/appfiles/images/' . $this->id . '/' . $image->album->slug . '/' . $image->name . '.' . $image->type);
         return $this->getAvatarUrl();
     }
 

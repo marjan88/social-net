@@ -41,6 +41,10 @@ class Image extends Model
     {
         
     }
+    
+    public function getImagePath() {
+        return asset('appfiles/images/' .  \Auth::id() . '/'. $this->album->slug . '/' .$this->name . '.' . $this->type);
+    }
 
     public function like()
     {

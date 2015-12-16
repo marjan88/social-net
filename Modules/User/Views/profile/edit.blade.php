@@ -54,7 +54,7 @@
     </div>
     <div class="col-lg-4 col-lg-offset-2">
         <ul class="list-unstyled">
-            <li><a href="{{route('albums')}}"><i class="fa fa-image"></i> Images</a></li>
+            <li><a href="{{route('albums.index')}}"><i class="fa fa-image"></i> Images</a></li>
         </ul>
     </div>
 </div>
