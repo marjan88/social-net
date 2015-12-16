@@ -6,6 +6,7 @@ use Chatty\Http\Controllers\Controller;
 use Modules\ImageAlbum\Repositories\ImageAlbumRepository;
 use Modules\ImageAlbum\Http\Requests\ImageAlbumStoreRequest;
 
+
 class ImageAlbumController extends Controller
 {
 
@@ -18,12 +19,9 @@ class ImageAlbumController extends Controller
         $this->middleware('auth');
     }
 
-    public function storeImage(ImageAlbumStoreRequest $request)
+    public function index()
     {
-        if (\Request::isMethod('post')) {
-           
-        }
-        return redirect()->back();
+        print_r(\Auth::user()->albums());
     }
 
 }

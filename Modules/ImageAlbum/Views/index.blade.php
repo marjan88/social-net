@@ -1,5 +1,6 @@
 @extends('templates.default')
 
 @section('content')
-<h1>Page</h1>
+<h2>Albums</h2>
+<hr>
 @stop
