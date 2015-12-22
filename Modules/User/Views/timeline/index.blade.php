@@ -118,3 +118,7 @@
     </div>
 </div>
 @stop
+@section('scripts')
+@parent
+<!--<script type="text/babel" src="{{asset('assets/site/js/react.js')}}"></script>-->
+@stop

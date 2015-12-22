@@ -26,10 +26,17 @@ class ProfileController extends Controller
         if (!$user) {
             abort(404);
         }
-        
+        $mutualFriends = $user->getFriends();
+//        echo '<pre>';print_r($mutualFriends);exit;
+        $numMutualFriends = [];
+        foreach($mutualFriends as $mutualFriend){
+            if(\Auth::user()->isFriendsWith($mutualFriend)) {
+                $numMutualFriends[] = $mutualFriend->id;
+            }
+        }        
         $statuses = $user->statuses()->notReply()->get();
         $authUserIsFriend = \Auth::user()->isFriendsWith($user);
-        return view('user::profile.index', compact('user', 'statuses', 'authUserIsFriend'));
+        return view('user::profile.index', compact('user', 'statuses', 'authUserIsFriend', 'numMutualFriends'));
     }
 
     public function getEdit()

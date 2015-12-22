@@ -23,6 +23,12 @@ Route::get('/friends/add/{username}', ['uses' => 'FriendController@getAdd', 'as'
 Route::get('/friends/accept/{username}', ['uses' => 'FriendController@getAccept', 'as' => 'user.friends.accept']);
 Route::post('/friends/delete', ['uses' => 'FriendController@deleteRequest', 'as' => 'user.friends.delete']);
 
+//FRIENDS ALBUMS
+
+Route::resource('user.albums', 'UserAlbumController');
+
+
+
 // API
 Route::group(['prefix' => 'api'], function () {
    Route::get('friend-requests', ['uses' => 'FriendController@getRequests']);

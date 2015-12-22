@@ -14,7 +14,10 @@
                 @if($user->location)
                 <p>{{$user->location}}</p>
                 @endif
-
+                <ul class="list-inline">
+                    <li><a href="{{route('user.albums.index', ['user'=> $user])}}"><i class="fa fa-image"></i> Photos</a></li>
+                </ul>
+                
             </div>
             <hr/>
 
@@ -143,6 +146,9 @@
     <div class="col-lg-4 col-lg-offset-3">      
         @if(\Auth::user()->isFriendsWith($user))
         <p>You are friends with {{$user->getFullName()}}</p>
+       
+        <p><small>You have {{count($numMutualFriends)}} mutual {{str_plural('friend', count($numMutualFriends))}}.</small></p>
+        
         @include('templates.partials.delete-friend', ['btnName' => 'Remove'])
         @endif
         <h4><?php echo (\Auth::user()->id == $user->id) ? 'Your' : $user->getNameOrUsername() . 's'; ?> friends.

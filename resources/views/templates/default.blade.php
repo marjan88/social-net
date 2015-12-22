@@ -29,8 +29,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{asset('assets/site/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/site/js/fileinput.min.js')}}"></script>
-    <!--<script type="text/babel" src="{{asset('assets/site/js/react.js')}}"></script>-->
-     <!--<script type="text/babel" src="{{asset('assets/site/js/requests.js')}}"></script>-->
+    
+    
 
     @show
 </body>
