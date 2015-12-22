@@ -17,7 +17,10 @@ class UserAlbumController extends Controller
 
     public function index(User $user)
     {
-       print_r($user->albums()->get());exit;
+        $albums = $user->albums()->get();
+        $images = $user->images()->get();
+
+        return view('image_album::index', compact('albums', 'images'));
     }
 
 }
