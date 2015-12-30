@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ImageAlbum\Entities;
+namespace Modules\ImageAlbum\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,11 +14,11 @@ class ImageAlbum extends Model
     {
         return $this->hasMany('Modules\Image\Entities\Image', 'album_id');
     }
-    
-    public function user() {
+
+    public function user()
+    {
         return $this->belongsTo('Modules\User\Entities\User', 'user_id');
     }
-    
 
     public static function storeItem($request)
     {
@@ -27,7 +27,7 @@ class ImageAlbum extends Model
             return $img;
         return false;
     }
-    
+
     public static function getItem($imgId)
     {
         $img = ImageAlbum::where('user_id', \Auth::id())->where('image_id', $imgId)->first();
@@ -40,7 +40,5 @@ class ImageAlbum extends Model
     {
         
     }
-
-    
 
 }
