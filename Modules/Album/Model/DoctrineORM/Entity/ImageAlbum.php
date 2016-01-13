@@ -1,13 +1,9 @@
 <?php
 
-namespace Modules\ImageAlbum\Entity;
-
-use Illuminate\Database\Eloquent\Model;
-
-class ImageAlbum extends Model
+class ImageAlbum 
 {
 
-    protected $table    = 'image_albums';
+    protected $table    = 'albums';
     protected $fillable = ['name', 'user_id', 'image_id', 'slug'];
 
     public function images()

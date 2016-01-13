@@ -3,13 +3,14 @@
 namespace Modules\Album\Model\DoctrineORM\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Modules\User\Entities\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Modules\Image\Model\DoctrineORM\Entity\Image;
 use Modules\Album\Model\DoctrineORM\AlbumInterface;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="albums")
- * @Entity(repositoryClass="Modules\Album\Model\DoctrineORM\Repository\AlbumRepository")
+/** 
+ * @ORM\Entity(repositoryClass="Modules\Album\Model\DoctrineORM\Repository\AlbumRepository")
+ * @ORM\Table(name="albums") 
  * @ORM\HasLifecycleCallbacks()
  */
 class Album implements AlbumInterface
@@ -22,39 +23,32 @@ class Album implements AlbumInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="title",type="string")
      */
-    private $title;
+    protected $title;
 
     /**
      * @ORM\Column(name="user_id", type="integer")
      */
-    private $userId;
+    protected $userId;
 
     /**
      * @ORM\Column(name="slug", type="string")
      */
-    private $slug;
+    protected $slug;
 
     /**
-     * @ORM\Column(name="visible", type="bool")
+     * @ORM\Column(name="is_visible", columnDefinition="TINYINT DEFAULT 1 NOT NULL")
      */
-    private $visible;
+    protected $visible;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="albums", cascade={"persist"})
-     * @var ArrayCollection|Theory[]
-     */
-    protected $images;
+    
 
-    public function __construct()
-    {
 
-        $this->images = new ArrayCollection;
-    }
+   
 
     public function getId()
     {
@@ -106,17 +100,7 @@ class Album implements AlbumInterface
         $this->visible = $visible;
     }
 
-    public function addImage(Image $image)
-    {
-        if (!$this->images->contains($image)) {
-            $image->setAlbum($this);
-            $this->images->add($image);
-        }
-    }
+  
 
-    public function getImages()
-    {
-        return $this->images;
-    }
 
 }

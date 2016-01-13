@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\ImageAlbum\Http\Requests;
+namespace Modules\Album\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ImageAlbumStoreRequest extends FormRequest
+class AlbumStoreRequest extends FormRequest
 {
 
     /**

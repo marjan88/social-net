@@ -17,7 +17,7 @@ class Image extends Model
 
     public function album()
     {
-        return $this->belongsTo('Modules\ImageAlbum\Entities\ImageAlbum', 'album_id');
+        return $this->belongsTo('Modules\Album\Model\DoctrineORM\Entity\Album', 'album_id');
     }
 
     public static function storeItem($request)

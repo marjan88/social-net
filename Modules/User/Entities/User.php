@@ -8,7 +8,9 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Modules\User\Entities\UserInterface;
 use Modules\Status\Entities\Status;
 use Modules\Image\Entities\Image;
+use Modules\Album\Model\DoctrineORM\Entity\Album;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -28,6 +30,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'users';
 
     /**
+     * @ORM\OneToMany(targetEntity="Album", mappedBy="users", cascade={"persist"})
+     * @var ArrayCollection|Album[]
+     */
+    protected $albums;
+    
+     public function __construct()
+    {
+
+        $this->albums = new ArrayCollection;
+    }
+    
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -46,9 +60,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('Modules\Status\Entities\Status', 'user_id');
     }
     
-    public function albums(){
-        return $this->hasMany('Modules\ImageAlbum\Entities\ImageAlbum', 'user_id');
+    public function getAlbums() {
+        return $this->albums;
     }
+    
+//    public function albums(){
+//        return $this->hasMany('Modules\Album\Model\DoctrineORM\Entity\Album', 'user_id');
+//    }
 
     public function getNameOrUsername()
     {
@@ -75,7 +93,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getProfilePicture()
     {
         $image = $this->images()->where('is_profile', true)->first();
-        if($image)
+        if($image && $image->album)
             return asset('/appfiles/images/' . $this->id . '/' . $image->album->slug . '/' . $image->name . '.' . $image->type);
         return $this->getAvatarUrl();
     }

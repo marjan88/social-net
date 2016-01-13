@@ -2,26 +2,26 @@
 
 namespace Modules\Album\Model\DoctrineORM\Repository;
 
-use Modules\Album\Model\DoctrineORM\Entity\Album;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-class AlbumRepository extends EntityRepository
+class AlbumRepository extends EntityRepository 
 {
 
     /**
      * @var string
      */
-    private $class = 'Modules\Album\Model\DoctrineORM\Entity\Album';
+    protected $_entityName = 'Modules\Album\Model\DoctrineORM\Entity\Album';
 
     /**
      * @var EntityManager
      */
-    private $em;
+    protected $_em;
 
     public function __construct(EntityManager $em)
     {
-        $this->em = $em;
+        $this->_em = $em;
+       
     }
     
     public function findItems($options = array())
@@ -107,11 +107,18 @@ class AlbumRepository extends EntityRepository
 
     public function findItemById($id)
     {
-        return $this->findOneBy(array('id' => $id));
+        return $this->em->findOneBy(array('id' => $id));
     }
+    
 
-//    public function findItemByUsername($username)
-//    {
-//        return $this->findOneBy(array('username' => $username));
-//    }
+    public function findItemsByUserId($id)
+    {
+        $builder = $this->createQueryBuilder('t');
+        $builder->select('t');        
+        $builder->where('t.userId = :id')->setParameter('id', $id);
+        
+        $query = $builder->getQuery();
+        return $query->execute();
+       
+    }
 }

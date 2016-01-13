@@ -2,7 +2,11 @@
 
 namespace Modules\Album\Providers;
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Support\ServiceProvider;
+use Modules\Album\Model\DoctrineORM\Entity\Album;
+use Modules\Album\Model\DoctrineORM\AlbumRepositoryInterface;
+use Modules\Album\Model\DoctrineORM\Repository\AlbumRepository;
 
 class AlbumServiceProvider extends ServiceProvider
 {
@@ -16,7 +20,7 @@ class AlbumServiceProvider extends ServiceProvider
     {
 
         $this->app->make('Modules\Album\Http\Controllers\AlbumController');
-        $this->loadViewsFrom(__DIR__ . '/../Views', 'albums');
+        $this->loadViewsFrom(__DIR__ . '/../Views', 'album');
     }
 
     /**
@@ -26,12 +30,12 @@ class AlbumServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ScientistRepository::class, function($app) {
-            // This is what Doctrine's EntityRepository needs in its constructor.
-            return new DoctrineScientistRepository(
-                    $app['em'], $app['em']->getClassMetaData(Scientist::class)
-            );
-        });
+//        $this->app->bind(AlbumRepositoryInterface::class, function($app) {
+//            // This is what Doctrine's EntityRepository needs in its constructor.            
+//            return new AlbumRepository(
+//                    $app['em'], $app['em']->getClassMetaData(Album::class)
+//            );
+//        });
     }
 
 }

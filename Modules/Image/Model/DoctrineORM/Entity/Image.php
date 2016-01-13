@@ -5,6 +5,7 @@ namespace Modules\Image\Model\DoctrineORM\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Modules\Image\Model\DoctrineORM\Entity\Album;
 use Modules\Image\Model\DoctrineORM\ImageInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -55,7 +56,7 @@ class Image implements ImageInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Album", inversedBy="images")
-     * @var Scientist
+     * @var Album
      */
     protected $album;
 
