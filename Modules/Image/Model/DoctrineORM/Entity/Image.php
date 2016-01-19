@@ -5,7 +5,7 @@ namespace Modules\Image\Model\DoctrineORM\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Modules\Image\Model\DoctrineORM\Entity\Album;
 use Modules\Image\Model\DoctrineORM\ImageInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+//use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -45,27 +45,17 @@ class Image implements ImageInterface
     private $size;
 
     /**
-     * @ORM\Column(name="is_profile", type="tinyInt")
+     * @ORM\Column(name="is_profile", type="integer")
      */
     private $isProfile;
 
     /**
-     * @ORM\Column(name="album_id", type="integer")
-     */
-    private $albumId;
+     * @ORM\ManyToOne(targetEntity="Modules\Album\Model\DoctrineORM\Entity\Album")
+     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
+     * */
+    private $album;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Album", inversedBy="images")
-     * @var Album
-     */
-    protected $album;
-
-    public function __construct()
-    {
-
-        $this->album = new ArrayCollection;
-    }
-
+    
     public function getId()
     {
         return $this->id;

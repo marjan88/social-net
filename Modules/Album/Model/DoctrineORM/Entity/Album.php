@@ -8,13 +8,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Modules\Image\Model\DoctrineORM\Entity\Image;
 use Modules\Album\Model\DoctrineORM\AlbumInterface;
 
-/** 
+/**
  * @ORM\Entity(repositoryClass="Modules\Album\Model\DoctrineORM\Repository\AlbumRepository")
  * @ORM\Table(name="albums") 
  * @ORM\HasLifecycleCallbacks()
  */
 class Album implements AlbumInterface
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="Modules\Image\Model\DoctrineORM\Entity\Image", mappedBy="album")
+     */
+    protected $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     /**
      * @var integer $id
@@ -30,8 +40,8 @@ class Album implements AlbumInterface
      */
     protected $title;
 
-    /**
-     * @ORM\Column(name="user_id", type="integer")
+   /**
+     * @ORM\Column(name="user_id",type="string")
      */
     protected $userId;
 
@@ -44,11 +54,6 @@ class Album implements AlbumInterface
      * @ORM\Column(name="is_visible", columnDefinition="TINYINT DEFAULT 1 NOT NULL")
      */
     protected $visible;
-
-    
-
-
-   
 
     public function getId()
     {
@@ -80,9 +85,9 @@ class Album implements AlbumInterface
         $this->title = $title;
     }
 
-    public function setUserId($user_id)
+    public function setUserId($userId)
     {
-        $this->userId = $user_id;
+        $this->user = $userId;
     }
 
     public function setSlug($slug)
@@ -100,7 +105,9 @@ class Album implements AlbumInterface
         $this->visible = $visible;
     }
 
-  
-
+    public function getImages()
+    {
+        return $this->images;
+    }
 
 }

@@ -19,7 +19,12 @@ class AlbumController extends Controller {
     public function index() {
       
         $albums =  $this->albumRepo->findItemsByUserId(\Auth::id()); 
-        print_r($albums);exit;
+    foreach($albums as $album) {
+        foreach($album->getImages() as $image) {
+            echo '<pre>';print_r($image->getType());
+        }
+        
+    }exit;
         $images = \Auth::user()->images()->get();
 
         return view('album::index', compact('albums', 'images'));
