@@ -17,9 +17,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        if (\Auth::check()) {
-            
-            $statuses = $this->statusRepository->getAllStatuses();                     
+        if (\Auth::check()) {            
+            $statuses = $this->statusRepository->getAllStatuses();                  
             return view('user::timeline.index', compact('statuses'));
         }
         return view('home');

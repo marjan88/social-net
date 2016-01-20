@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Modules\User\Entities\UserInterface;
 use Modules\Status\Entities\Status;
-use Modules\Image\Entities\Image;
-use Modules\Album\Model\DoctrineORM\Entity\Album;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -30,7 +28,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'users';
 
     /**
-     * @ORM\OneToMany(targetEntity="Album", mappedBy="users", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Modules\Album\Model\DoctrineORM\Entity\Album", mappedBy="users", cascade={"persist"})
      * @var ArrayCollection|Album[]
      */
     protected $albums;
@@ -92,9 +90,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function getProfilePicture()
     {
-        $image = $this->images()->where('is_profile', true)->first();
-        if($image && $image->album)
-            return asset('/appfiles/images/' . $this->id . '/' . $image->album->slug . '/' . $image->name . '.' . $image->type);
+//        $image = $this->images()->where('is_profile', true)->first();
+//        if($image && $image->album)
+//            return asset('/appfiles/images/' . $this->id . '/' . $image->album->slug . '/' . $image->name . '.' . $image->type);
         return $this->getAvatarUrl();
     }
 

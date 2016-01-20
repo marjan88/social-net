@@ -3,7 +3,7 @@
 namespace Modules\Album\Model\DoctrineORM\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Modules\User\Entities\User;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Modules\Image\Model\DoctrineORM\Entity\Image;
 use Modules\Album\Model\DoctrineORM\AlbumInterface;

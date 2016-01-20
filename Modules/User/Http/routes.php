@@ -30,8 +30,8 @@ Route::resource('user.albums', 'UserAlbumController');
 
 
 // API
-Route::group(['prefix' => 'api'], function () {
-   Route::get('friend-requests', ['uses' => 'FriendController@getRequests']);
+Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
+   Route::get('friends', ['uses' => 'Api\ApiController@getRequests']);
    
 });
 

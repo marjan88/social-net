@@ -76,10 +76,6 @@ class FriendController extends Controller {
          return redirect()->back();
     }
 
-    public function getRequests() {
-        if (\Auth::user()->getFriendRequests()->count() > 0)
-            return response()->json(['requests' => true, 'count' => \Auth::user()->getFriendRequests()->count()]);
-        return response()->json(['requests' => false]);
-    }
+   
 
 }
