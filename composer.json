@@ -7,7 +7,10 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "laravel-doctrine/orm": "1.0.*",
+        "laravel-doctrine/acl": "1.0.*"
+        
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
