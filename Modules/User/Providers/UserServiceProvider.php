@@ -29,11 +29,12 @@ class UserServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Views', 'user');
 
         $this->publishes([
-            __DIR__ . '/../Views' => base_path('resources/views/vendor/user'),
-            __DIR__ . '/../config/module.auth.php' => config_path('module.auth.php'),
+            __DIR__ . '/../Views'                       => base_path('resources/views/vendor/user'),
+            __DIR__ . '/../Lang'                        => base_path('resources/lang'),
+            __DIR__ . '/../database/migrations'         => base_path('database/migrations'),
+            __DIR__ . '/../config/module.user.auth.php' => config_path('module.user.auth.php'),
         ]);
-        $this->app['config']['auth'] =  \Config::get('module.auth');
-       
+        $this->app['config']['auth'] = \Config::get('module.user.auth');
     }
 
     /**
@@ -46,7 +47,6 @@ class UserServiceProvider extends ServiceProvider
         $this->app->bind(
                 'Illuminate\Contracts\Auth\Registrar', 'Modules\User\Services\Registrar'
         );
-       
     }
 
     private function registerMiddleware($router)

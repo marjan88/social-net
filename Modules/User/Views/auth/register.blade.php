@@ -35,11 +35,7 @@
         <input type="text" placeholder="Last name" class="form-control" id="last_name" name="last_name" value="{{\Request::old('last_name') ?: ''}}">
         {!! $errors->first('last_name', '<span class="help-block" role="alert"><small>:message</small></span>')!!}
     </div>
-     <div class="form-group {{{ $errors->has('location') ? 'has-error' : '' }}}">
-        <label class="sr-only" for="location">Location</label>
-        <input type="text" placeholder="Location" class="form-control" id="location" name="location" value="{{\Request::old('location') ?: ''}}">
-        {!! $errors->first('location', '<span class="help-block" role="alert"><small>:message</small></span>')!!}
-    </div>
+    
    
     <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
 </form>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Chatty\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Modules\User\Model\DoctrineORM\Repository\UserRepository;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
@@ -26,6 +27,8 @@ class AuthController extends Controller
 
 use AuthenticatesAndRegistersUsers,
     ThrottlesLogins;
+
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -59,13 +62,13 @@ use AuthenticatesAndRegistersUsers,
      * @return \Illuminate\Http\Response
      */
     public function postLogin(Request $request)
-    {      
-        $this->registrar->validator($request->all()); 
+    {
+        $this->registrar->validator($request->all());
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        $throttles = $this->isUsingThrottlesLoginsTrait(); 
+        $throttles = $this->isUsingThrottlesLoginsTrait();
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
             return $this->sendLockoutResponse($request);
@@ -74,8 +77,15 @@ use AuthenticatesAndRegistersUsers,
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-          
-            return $this->handleUserWasAuthenticated($request, $throttles);
+            if (Auth::user()->hasRoleByName('super-admin'))
+                return redirect()->route('dashboard.index');
+
+            if (Auth::user()->getConfirmed()) {
+                return $this->handleUserWasAuthenticated($request, $throttles);
+            }
+
+            Auth::logout();
+            return redirect()->route('login')->with('info', trans('user.verify.check-again'));
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -101,6 +111,7 @@ use AuthenticatesAndRegistersUsers,
     {
         return view('user::auth.register');
     }
+
     /**
      * Handle a registration request for the application.
      *
@@ -116,12 +127,27 @@ use AuthenticatesAndRegistersUsers,
                     $request, $validator
             );
         }
+        $this->registrar->create($request->all());
+//        Auth::login($this->registrar->create($request->all()));
 
-        Auth::login($this->registrar->create($request->all()));
-
-        return redirect($this->redirectPath());
+        return redirect()->route('login')->with('info', trans('user.verify.check'));
     }
-    
+
+    /**
+     * Handle a confirmation request.
+     *
+     * @param  Modules\User\Repositories\UserRepository $userRepo
+     * @param  string  $confirmation_code
+     * @return Response
+     */
+    public function getConfirm(UserRepository $userRepo, $confirmationCode)
+    {
+        $user = $userRepo->confirm($confirmationCode);
+        if ($user)
+            return redirect()->route('login')->with('success', trans('user.verify.success'));
+        return redirect()->route('login')->with('error', trans('user.verify.error'));
+    }
+
     /**
      * Log the user out of the application.
      *

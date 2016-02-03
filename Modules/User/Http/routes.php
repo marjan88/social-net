@@ -9,6 +9,10 @@ Route::get('/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'logou
 Route::get('/register', ['uses' => 'Auth\AuthController@getRegister', 'as' => 'register']);
 Route::post('/register', ['uses' => 'Auth\AuthController@postRegister', 'as' => 'register']);
 
+// VERIFY
+Route::get('auth/confirm/{token}', ['uses' => 'Auth\AuthController@getConfirm', 'as' => 'confirm']);
+
+
 // SEARCH
 Route::get('/search', ['uses' => 'SearchController@getResults', 'as' => 'search.results']);
 
@@ -23,9 +27,7 @@ Route::get('/friends/add/{username}', ['uses' => 'FriendController@getAdd', 'as'
 Route::get('/friends/accept/{username}', ['uses' => 'FriendController@getAccept', 'as' => 'user.friends.accept']);
 Route::post('/friends/delete', ['uses' => 'FriendController@deleteRequest', 'as' => 'user.friends.delete']);
 
-//FRIENDS ALBUMS
 
-Route::resource('user.albums', 'UserAlbumController');
 
 
 
