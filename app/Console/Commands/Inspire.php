@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Console\Commands;
+namespace MqCMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

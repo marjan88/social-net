@@ -13,3 +13,6 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
+Route::get('test', function(){
+   return view('layouts.backend'); 
+});

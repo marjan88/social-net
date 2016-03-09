@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Controllers;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Modules\User\Entities\User;
 use Modules\User\Repositories\UserRepository;
 

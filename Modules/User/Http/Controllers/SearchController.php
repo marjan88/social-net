@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Controllers;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\User\Entities\User;
 

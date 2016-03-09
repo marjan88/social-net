@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Exceptions;
+namespace MqCMS\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

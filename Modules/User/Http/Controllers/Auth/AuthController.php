@@ -6,7 +6,7 @@ use Modules\Entities\User;
 use Auth;
 use Validator;
 use Illuminate\Http\Request;
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Modules\User\Model\DoctrineORM\Repository\UserRepository;
@@ -78,7 +78,7 @@ use AuthenticatesAndRegistersUsers,
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
             if (Auth::user()->hasRoleByName('super-admin'))
-                return redirect()->route('dashboard.index');
+                return redirect()->route('cms.index');
 
             if (Auth::user()->getConfirmed()) {
                 return $this->handleUserWasAuthenticated($request, $throttles);

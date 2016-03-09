@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Http;
+namespace MqCMS\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Chatty\Http\Middleware\EncryptCookies::class,
+        \MqCMS\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Chatty\Http\Middleware\VerifyCsrfToken::class,
+        \MqCMS\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,8 +26,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Chatty\Http\Middleware\Authenticate::class,
+        'auth' => \MqCMS\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \Chatty\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \MqCMS\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

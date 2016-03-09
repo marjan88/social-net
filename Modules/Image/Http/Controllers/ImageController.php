@@ -2,7 +2,7 @@
 
 namespace Modules\Image\Http\Controllers;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Modules\Image\Repositories\ImageRepository;
 use Modules\Image\Http\Requests\ImgStoreRequest;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Events;
+namespace MqCMS\Events;
 
 abstract class Event
 {

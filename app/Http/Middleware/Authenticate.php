@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Http\Middleware;
+namespace MqCMS\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

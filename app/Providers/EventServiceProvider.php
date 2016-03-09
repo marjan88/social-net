@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Providers;
+namespace MqCMS\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Chatty\Events\SomeEvent' => [
-            'Chatty\Listeners\EventListener',
+        'MqCMS\Events\SomeEvent' => [
+            'MqCMS\Listeners\EventListener',
         ],
     ];
 

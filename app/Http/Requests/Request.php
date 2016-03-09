@@ -1,6 +1,6 @@
 <?php
 
-namespace Chatty\Http\Requests;
+namespace MqCMS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

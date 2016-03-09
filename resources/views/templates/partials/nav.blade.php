@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{route('home')}}" class="navbar-brand">Chatty</a>
+            <a href="{{route('home')}}" class="navbar-brand">MaqlaCMS</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
             @if(\Auth::user())

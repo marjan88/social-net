@@ -2,7 +2,7 @@
 
 namespace Modules\Status\Http\Controllers;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Modules\Status\Http\Requests\StoreStatusRequest;
 use Modules\Status\Repositories\StatusRepository;
 use Illuminate\Http\Request;

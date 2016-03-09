@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Controllers\Auth;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

@@ -2,7 +2,7 @@
 
 namespace Modules\Album\Http\Controllers;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Modules\Album\Http\Requests\AlbumStoreRequest;
 use Modules\Album\Model\DoctrineORM\Repository\AlbumRepository;
 

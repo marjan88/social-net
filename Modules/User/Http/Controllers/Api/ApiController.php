@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Controllers\Api;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {

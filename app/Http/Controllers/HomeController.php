@@ -1,8 +1,8 @@
 <?php
 
-namespace Chatty\Http\Controllers;
+namespace MqCMS\Http\Controllers;
 
-use Chatty\Http\Controllers\Controller;
+use MqCMS\Http\Controllers\Controller;
 use Modules\Status\Repositories\StatusRepository;
 
 class HomeController extends Controller
@@ -17,9 +17,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        if (\Auth::check()) {            
-            $statuses = $this->statusRepository->getAllStatuses();                  
-            return view('user::timeline.index', compact('statuses'));
+        if (\Auth::check()) {
+            return view('user::timeline.index');
         }
         return view('home');
     }
